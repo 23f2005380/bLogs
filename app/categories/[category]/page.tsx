@@ -5,22 +5,26 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore"
 import { db } from "@/lib/firebase"
+import { useAuth } from "@/components/AuthProvider"
 
 type BlogPost = {
   id: string
   title: string
   content: string
   author: string
+  authorId: string
   category: string
   tags: string[]
   imageUrl: string | null
   createdAt: Date
+  isPrivate: boolean
 }
 
 export default function CategoryPage() {
   const { category } = useParams()
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,12 +39,22 @@ export default function CategoryPage() {
         ...doc.data(),
         createdAt: doc.data().createdAt.toDate(),
       })) as BlogPost[]
-      setPosts(fetchedPosts)
+
+      // Filter out private posts that don't belong to the current user
+      const filteredPosts = fetchedPosts.filter((post) => !post.isPrivate || (user && post.authorId === user.uid))
+
+      setPosts(filteredPosts)
       setLoading(false)
     }
 
     fetchPosts()
-  }, [category])
+  }, [category, user])
+
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement("DIV")
+    tmp.innerHTML = html
+    return tmp.textContent || tmp.innerText || ""
+  }
 
   if (loading) {
     return (
@@ -81,7 +95,7 @@ export default function CategoryPage() {
 
               <div className="p-6">
                 <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                <p className="text-gray-600 mb-4">{post.content.substring(0, 100)}...</p>
+                <p className="text-gray-600 mb-4">{stripHtml(post.content).substring(0, 100)}...</p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">
                     By {post.author} on {post.createdAt.toLocaleDateString()}

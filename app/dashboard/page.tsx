@@ -12,6 +12,7 @@ type BlogPost = {
   content: string
   author: string
   createdAt: Date
+  isPrivate: boolean
 }
 
 export default function Dashboard() {
@@ -95,6 +96,11 @@ export default function Dashboard() {
                     <Link href={`/post/${post.id}`} className="text-blue-500 hover:underline">
                       {post.title}
                     </Link>
+                    {post.isPrivate && (
+                      <span className="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                        Private
+                      </span>
+                    )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {post.createdAt.toLocaleDateString()}

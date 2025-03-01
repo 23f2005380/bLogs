@@ -1,16 +1,17 @@
 import type React from "react"
 import { Inter } from "next/font/google"
-import "./globals.css"
+
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { AuthProvider } from "@/components/AuthProvider"
+import { ThemeProvider } from "next-themes"
+import "@/app/globals.css" // Ensure global CSS is imported
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "Firebase Blog",
   description: "A responsive blogging site with Firebase integration",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -21,18 +22,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow container mx-auto px-4 py-8">{children}</main>
-            <Footer />
-          </div>
-        </AuthProvider>
+        <ThemeProvider attribute="class">
+          <AuthProvider>
+            <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
+              <Header />
+              <main className="flex-grow container mx-auto px-4 py-8">{children}</main>
+              <Footer />
+            </div>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
 }
 
-
-
-import './globals.css'

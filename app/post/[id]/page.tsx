@@ -12,6 +12,7 @@ type BlogPost = {
   id: string
   title: string
   content: string
+  plainTextContent: string
   author: string
   authorId: string
   category: string
@@ -21,12 +22,14 @@ type BlogPost = {
   likes: number
   likedBy: string[]
   editorType: "rich" | "html"
+  isPrivate: boolean
 }
 
 export default function BlogPost() {
   const { id } = useParams()
   const [post, setPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null) // Added error state
   const router = useRouter()
   const { user } = useAuth()
 
@@ -35,20 +38,26 @@ export default function BlogPost() {
       const docRef = doc(db, "posts", id as string)
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
-        setPost({
+        const postData = {
           id: docSnap.id,
           ...docSnap.data(),
           createdAt: docSnap.data().createdAt.toDate(),
           likes: docSnap.data().likes || 0,
           likedBy: docSnap.data().likedBy || [],
           editorType: docSnap.data().editorType || "html",
-        } as BlogPost)
+        } as BlogPost
+
+        if (postData.isPrivate && (!user || user.uid !== postData.authorId)) {
+          setError("This post is private and you don't have permission to view it.")
+        } else {
+          setPost(postData)
+        }
       }
       setLoading(false)
     }
 
     fetchPost()
-  }, [id])
+  }, [id, user])
 
   const handleDelete = async () => {
     if (!user || !post || user.uid !== post.authorId) {
@@ -108,6 +117,10 @@ export default function BlogPost() {
 
   if (loading) {
     return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>
   }
 
   if (!post) {
@@ -175,8 +188,8 @@ export default function BlogPost() {
         </div>
       )}
 
-      <div className={`prose max-w-none mb-8 ${post.editorType === "rich" ? "" : "whitespace-pre-wrap"}`}>
-        {post.editorType === "rich" ? <div dangerouslySetInnerHTML={{ __html: post.content }} /> : post.content}
+      <div className="prose max-w-none mb-8">
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </div>
 
       <CommentSection postId={post.id} />

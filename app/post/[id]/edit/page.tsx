@@ -7,6 +7,14 @@ import { useParams, useRouter } from "next/navigation"
 import { doc, getDoc, updateDoc } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 import { useAuth } from "@/components/AuthProvider"
+import dynamic from "next/dynamic"
+
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+})
+
+import "react-quill/dist/quill.snow.css"
 
 type BlogPost = {
   id: string
@@ -14,7 +22,12 @@ type BlogPost = {
   content: string
   author: string
   authorId: string
+  category: string
+  tags: string[]
+  imageUrl: string | null
   createdAt: Date
+  isPrivate: boolean
+  editorType: "rich" | "html"
 }
 
 export default function EditPost() {
@@ -22,6 +35,8 @@ export default function EditPost() {
   const [post, setPost] = useState<BlogPost | null>(null)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [isPrivate, setIsPrivate] = useState(false)
+  const [editorType, setEditorType] = useState<"rich" | "html">("rich")
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const router = useRouter()
@@ -45,6 +60,8 @@ export default function EditPost() {
           setPost(postData)
           setTitle(postData.title)
           setContent(postData.content)
+          setIsPrivate(postData.isPrivate || false)
+          setEditorType(postData.editorType || "rich")
         }
       } else {
         setError("Post not found")
@@ -70,11 +87,23 @@ export default function EditPost() {
         title,
         content,
         updatedAt: new Date(),
+        isPrivate,
+        editorType,
       })
       router.push(`/post/${id}`)
     } catch (error: any) {
       setError(error.message)
     }
+  }
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+      ["link", "image"],
+      ["clean"],
+    ],
   }
 
   if (loading) {
@@ -103,17 +132,57 @@ export default function EditPost() {
           />
         </div>
         <div>
+          <label className="block mb-2 font-semibold">Editor Type</label>
+          <div className="flex space-x-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                value="rich"
+                checked={editorType === "rich"}
+                onChange={() => setEditorType("rich")}
+                className="form-radio"
+              />
+              <span className="ml-2">Rich Text Editor</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                value="html"
+                checked={editorType === "html"}
+                onChange={() => setEditorType("html")}
+                className="form-radio"
+              />
+              <span className="ml-2">HTML Editor</span>
+            </label>
+          </div>
+        </div>
+        <div>
           <label htmlFor="content" className="block mb-2 font-semibold">
             Content
           </label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-            className="w-full px-3 py-2 border rounded-md"
-            rows={10}
-          ></textarea>
+          {editorType === "rich" ? (
+            <ReactQuill theme="snow" value={content} onChange={setContent} modules={modules} />
+          ) : (
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+              className="w-full px-3 py-2 border rounded-md"
+              rows={10}
+            ></textarea>
+          )}
+        </div>
+        <div>
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              checked={isPrivate}
+              onChange={(e) => setIsPrivate(e.target.checked)}
+              className="form-checkbox h-5 w-5 text-blue-600"
+            />
+            <span className="ml-2 text-gray-700">Make this post private</span>
+          </label>
         </div>
         <div className="flex space-x-4">
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
