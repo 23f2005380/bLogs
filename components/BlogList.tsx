@@ -94,7 +94,7 @@ export default function BlogList({ limitPosts = 6 }: { limitPosts?: number }) {
               </span>
             </div>
 
-            <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-1000">{post.title}</h2>
 
             <p className="text-gray-600 mb-4">{stripHtml(post.content).substring(0, 100)}...</p>
 

@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Welcome to Blogy Blogs</h1>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">Welcome to Blogy Blogs</h1>
         <p className="text-gray-600">A responsive blogging platform built with Next.js and Firebase</p>
       </div>
 

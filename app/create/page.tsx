@@ -244,7 +244,7 @@ export default function CreatePost() {
               onChange={setContent}
               modules={modules}
               formats={formats}
-              className="h-auto min-h-[400px]"
+              className="h-auto "
             />
           ) : (
             <textarea
@@ -252,7 +252,7 @@ export default function CreatePost() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
-              className="w-full px-3 py-2 border rounded-md min-h-[400px]"
+              className="w-full min-h-[200px] px-3 py-2 border rounded-md "
               style={{ height: "auto", overflow: "hidden" }}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement
@@ -261,15 +261,16 @@ export default function CreatePost() {
               }}
             ></textarea>
           )}
-          <button
+          
+        </div>
+      <button
             type="submit"
-            className="absolute bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="  bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             disabled={loading}
           >
             {loading ? "Creating..." : "Create Post"}
           </button>
-        </div>
-      </form>
+          </form>
     </div>
   )
 }

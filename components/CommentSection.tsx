@@ -56,19 +56,19 @@ export default function CommentSection({ postId }: { postId: string }) {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Comments</h2>
+      <h2 className="text-2xl font-bold mb-4 dark:text-white">Comments</h2>
       <form onSubmit={handleSubmit} className="mb-4">
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Write a comment..."
-          className="w-full px-3 py-2 border rounded-md"
+          className="w-full px-3 py-2 border rounded-md dark:bg-gray-800 dark:text-white"
           rows={3}
           required
         ></textarea>
         <button
           type="submit"
-          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:opacity-50"
           disabled={!user}
         >
           {user ? "Post Comment" : "Sign in to comment"}
@@ -76,9 +76,9 @@ export default function CommentSection({ postId }: { postId: string }) {
       </form>
       <div className="space-y-4">
         {comments.map((comment) => (
-          <div key={comment.id} className="bg-gray-100 p-4 rounded-md">
-            <p className="mb-2">{comment.content}</p>
-            <p className="text-sm text-gray-600">
+          <div key={comment.id} className="bg-gray-100 p-4 rounded-md dark:bg-gray-800">
+            <p className="mb-2 dark:text-white">{comment.content}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               By {comment.author} on {comment.createdAt.toLocaleDateString()}
             </p>
           </div>
@@ -87,4 +87,3 @@ export default function CommentSection({ postId }: { postId: string }) {
     </div>
   )
 }
-
