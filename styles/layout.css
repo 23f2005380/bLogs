@@ -1,56 +1,48 @@
 /* Add styles for common HTML tags */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
-  margin: 1em 0;
+  font-family: 'Arial', sans-serif !important;
+  font-weight: bold !important;
+  margin: 1em 0 !important;
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 2.5em !important;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 2em !important;
 }
 
 h3 {
-  font-size: 1.75em;
+  font-size: 1.75em !important;
 }
 
 h4 {
-  font-size: 1.5em;
+  font-size: 1.5em !important;
 }
 
 h5 {
-  font-size: 1.25em;
+  font-size: 1.25em !important;
 }
 
 h6 {
-  font-size: 1em;
+  font-size: 1em !important;
 }
 
 p {
-  font-family: 'Arial', sans-serif;
-  margin: 1em 0;
-  line-height: 1.6;
+  font-family: 'Arial', sans-serif !important;
+  margin: 1em 0 !important;
+  line-height: 1.6 !important;
 }
 
 ul, ol {
-  margin: 1em 0;
-  padding-left: 1.5em;
+  margin: 1em 0 !important;
+  padding-left: 1.5em !important;
 }
 
 li {
-  margin: 0.5em 0;
+  margin: 0.5em 0 !important;
 }
 
-a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
 
 /* Add any other styles you need for your layout */

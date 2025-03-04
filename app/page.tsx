@@ -5,6 +5,7 @@ import Link from "next/link"
 import { collection, query, getDocs, limit } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 import BlogList from "@/components/BlogList"
+import SearchBar from "@/components/SearchBar"
 
 export default function Home() {
   const [hasData, setHasData] = useState<boolean | null>(null)
@@ -25,8 +26,16 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <div className="relative overflow-hidden">
+      {/* Blur Background Elements */}
+      <div className="blur-bg blur-bg-1"></div>
+      <div className="blur-bg blur-bg-2"></div>
+      <div className="blur-bg blur-bg-3"></div>
+
       <div className="mb-8">
+        <div className="md:hidden pb-10 w-full md:w-auto">
+          <SearchBar />
+        </div>
         <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">Welcome to Blogy Blogs</h1>
         <p className="text-gray-600">A responsive blogging platform built with Next.js and Firebase</p>
       </div>
@@ -48,4 +57,3 @@ export default function Home() {
     </div>
   )
 }
-

@@ -35,6 +35,7 @@ export default function EditPost() {
   const [post, setPost] = useState<BlogPost | null>(null)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [imageUrl, setImageUrl] = useState<string | null>("")
   const [isPrivate, setIsPrivate] = useState(false)
   const [editorType, setEditorType] = useState<"rich" | "html">("rich")
   const [loading, setLoading] = useState(true)
@@ -60,6 +61,7 @@ export default function EditPost() {
           setPost(postData)
           setTitle(postData.title)
           setContent(postData.content)
+          setImageUrl(postData.imageUrl)
           setIsPrivate(postData.isPrivate || false)
           setEditorType(postData.editorType || "rich")
         }
@@ -86,6 +88,7 @@ export default function EditPost() {
       await updateDoc(docRef, {
         title,
         content,
+        imageUrl,
         updatedAt: new Date(),
         isPrivate,
         editorType,
@@ -128,6 +131,18 @@ export default function EditPost() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className="w-full px-3 py-2 border rounded-md"
+          />
+        </div>
+        <div>
+          <label htmlFor="imageUrl" className="block mb-2 font-semibold">
+            Image URL
+          </label>
+          <input
+            type="text"
+            id="imageUrl"
+            value={imageUrl || ""}
+            onChange={(e) => setImageUrl(e.target.value)}
             className="w-full px-3 py-2 border rounded-md"
           />
         </div>
@@ -200,4 +215,3 @@ export default function EditPost() {
     </div>
   )
 }
-

@@ -94,7 +94,7 @@ export default function CategoryPage() {
               )}
 
               <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                <h2 className="text-xl dark:text-gray-900 font-semibold mb-2">{post.title}</h2>
                 <p className="text-gray-600 mb-4">{stripHtml(post.content).substring(0, 100)}...</p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">

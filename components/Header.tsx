@@ -11,14 +11,14 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="bg-gray-800 text-white">
+    <header className="bg-gray-800 text-white transition-colors duration-300">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold">
           Panch Blog
         </Link>
 
         <div className="flex items-center space-x-4">
-          <div className="hidden md:block w-full md:w-auto">
+          <div className=" hidden md:block w-full md:w-auto">
             <SearchBar />
           </div>
           <ThemeSwitcher />
@@ -47,34 +47,34 @@ export default function Header() {
         <nav className="hidden md:flex md:items-center md:space-x-4">
           <ul className="flex flex-col md:flex-row md:space-x-4 items-center">
             <li>
-              <Link href="/" className="hover:text-gray-300">
+              <Link href="/" className="hover:text-gray-300 transition-colors duration-300">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/categories" className="hover:text-gray-300">
+              <Link href="/categories" className="hover:text-gray-300 transition-colors duration-300">
                 Categories
               </Link>
             </li>
             {user ? (
               <>
                 <li>
-                  <Link href="/create" className="hover:text-gray-300">
+                  <Link href="/create" className="hover:text-gray-300 transition-colors duration-300">
                     Create Post
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard" className="hover:text-gray-300">
+                  <Link href="/dashboard" className="hover:text-gray-300 transition-colors duration-300">
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link href="/profile" className="hover:text-gray-300">
+                  <Link href="/profile" className="hover:text-gray-300 transition-colors duration-300">
                     Profile
                   </Link>
                 </li>
                 <li>
-                  <button onClick={signOut} className="hover:text-gray-300">
+                  <button onClick={signOut} className="hover:text-gray-300 transition-colors duration-300">
                     Sign Out
                   </button>
                 </li>
@@ -82,12 +82,12 @@ export default function Header() {
             ) : (
               <>
                 <li>
-                  <Link href="/signin" className="hover:text-gray-300">
+                  <Link href="/signin" className="hover:text-gray-300 transition-colors duration-300">
                     Sign In
                   </Link>
                 </li>
                 <li>
-                  <Link href="/signup" className="hover:text-gray-300">
+                  <Link href="/signup" className="hover:text-gray-300 transition-colors duration-300">
                     Sign Up
                   </Link>
                 </li>
@@ -126,34 +126,34 @@ export default function Header() {
         <nav className="flex flex-col items-center space-y-4">
           <ul className="flex flex-col items-center space-y-4">
             <li>
-              <Link href="/" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/categories" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/categories" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                 Categories
               </Link>
             </li>
             {user ? (
               <>
                 <li>
-                  <Link href="/create" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/create" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Create Post
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/dashboard" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link href="/profile" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/profile" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Profile
                   </Link>
                 </li>
                 <li>
-                  <button onClick={signOut} className="hover:text-gray-300 text-2xl">
+                  <button onClick={signOut} className="hover:text-gray-300 text-2xl transition-colors duration-300">
                     Sign Out
                   </button>
                 </li>
@@ -161,12 +161,12 @@ export default function Header() {
             ) : (
               <>
                 <li>
-                  <Link href="/signin" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/signin" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Sign In
                   </Link>
                 </li>
                 <li>
-                  <Link href="/signup" className="hover:text-gray-300 text-2xl" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/signup" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Sign Up
                   </Link>
                 </li>

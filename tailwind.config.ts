@@ -55,8 +55,11 @@ module.exports = {
       borderRadius: {
         lg: 'var(--radius)',
       },
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
+      },
     },
   },
   plugins: [],
 }
-
