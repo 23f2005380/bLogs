@@ -96,6 +96,9 @@ h6 {
   font-size: 0.875rem; /* 14px */
   font-weight: 700;
 }
+li {
+  list-style: initial;
+}
 @keyframes move {
   0% {
     transform: translate(0, 0);
