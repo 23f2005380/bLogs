@@ -46,34 +46,34 @@ export default function Header() {
 
         <nav className="hidden md:flex md:items-center md:space-x-4">
           <ul className="flex flex-col md:flex-row md:space-x-4 items-center">
-            <li>
+            <li className="list-none">
               <Link href="/" className="hover:text-gray-300 transition-colors duration-300">
                 Home
               </Link>
             </li>
-            <li>
+            <li className="list-none">
               <Link href="/categories" className="hover:text-gray-300 transition-colors duration-300">
                 Categories
               </Link>
             </li>
             {user ? (
               <>
-                <li>
+                <li className="list-none">
                   <Link href="/create" className="hover:text-gray-300 transition-colors duration-300">
                     Create Post
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <Link href="/dashboard" className="hover:text-gray-300 transition-colors duration-300">
                     Dashboard
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <Link href="/profile" className="hover:text-gray-300 transition-colors duration-300">
                     Profile
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <button onClick={signOut} className="hover:text-gray-300 transition-colors duration-300">
                     Sign Out
                   </button>
@@ -81,12 +81,12 @@ export default function Header() {
               </>
             ) : (
               <>
-                <li>
+                <li className="list-none">
                   <Link href="/signin" className="hover:text-gray-300 transition-colors duration-300">
                     Sign In
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <Link href="/signup" className="hover:text-gray-300 transition-colors duration-300">
                     Sign Up
                   </Link>
@@ -125,34 +125,34 @@ export default function Header() {
 
         <nav className="flex flex-col items-center space-y-4">
           <ul className="flex flex-col items-center space-y-4">
-            <li>
+            <li className="list-none">
               <Link href="/" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                 Home
               </Link>
             </li>
-            <li>
+            <li className="list-none">
               <Link href="/categories" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                 Categories
               </Link>
             </li>
             {user ? (
               <>
-                <li>
+                <li className="list-none">
                   <Link href="/create" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Create Post
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <Link href="/dashboard" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Dashboard
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <Link href="/profile" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Profile
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <button onClick={signOut} className="hover:text-gray-300 text-2xl transition-colors duration-300">
                     Sign Out
                   </button>
@@ -160,12 +160,12 @@ export default function Header() {
               </>
             ) : (
               <>
-                <li>
+                <li className="list-none">
                   <Link href="/signin" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Sign In
                   </Link>
                 </li>
-                <li>
+                <li className="list-none">
                   <Link href="/signup" className="hover:text-gray-300 text-2xl transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                     Sign Up
                   </Link>
