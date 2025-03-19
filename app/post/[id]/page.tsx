@@ -188,7 +188,7 @@ export default function BlogPost() {
         </div>
       )}
 
-      <div className="prose max-w-none mb-8">
+      <div className="prose max-w-none mb-8" style={{font-family:'Source Sans Pro'}}>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </div>
 
